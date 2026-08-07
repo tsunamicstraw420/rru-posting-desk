@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#1E0E2E">
+<link rel="icon" href="logo.png">
+<link rel="apple-touch-icon" href="logo.png">
+<title>Ruby's Posting Desk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+<style>
+:root{--pink:#FF3D9A;--gold:#F5C542;--ink:#0E0C12;--plum:#2A1230;--card:#241031;
+--line:#4a2a5a;--text:#F4EDF8;--mut:#BFA8CC;--green:#2ecc71;}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+background:linear-gradient(180deg,#1E0E2E 0%,#341242 45%,#0F0818 100%) fixed;color:var(--text);
+font-size:17px;line-height:1.45}
+.wrap{max-width:760px;margin:0 auto;padding:0 14px 90px}
+header{display:flex;align-items:center;gap:14px;padding:18px 2px 8px}
+header img{width:64px;height:64px}
+h1{font-family:Bangers,"Arial Black",Impact,sans-serif;font-size:34px;letter-spacing:1px;margin:0;color:#fff;
+text-shadow:0 0 18px rgba(255,61,154,.55)}
+.week{color:var(--mut);font-size:14px;margin:2px 0 0}
+.progress{background:#00000055;border:1px solid var(--line);border-radius:999px;height:30px;
+position:relative;margin:12px 0 4px;overflow:hidden}
+.progress .bar{position:absolute;inset:0;width:0%;background:linear-gradient(90deg,var(--pink),#ff7ec0);
+transition:width .35s}
+.progress .txt{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+font-weight:700;font-size:14px;text-shadow:0 1px 2px #0008}
+.tabs{display:flex;gap:8px;margin:14px 0 8px;position:sticky;top:0;z-index:10;
+background:linear-gradient(180deg,#1E0E2E 70%,transparent);padding:8px 0}
+.tabs button{flex:1;font-family:Bangers,"Arial Black",Impact,sans-serif;font-size:20px;letter-spacing:.5px;padding:12px 4px;
+border-radius:14px;border:2px solid var(--line);background:#1a0b26;color:var(--mut);cursor:pointer}
+.tabs button.on{background:var(--pink);border-color:var(--pink);color:#fff;
+box-shadow:0 0 16px rgba(255,61,154,.5)}
+.day{margin:26px 0 10px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.day h2{font-family:Bangers,"Arial Black",Impact,sans-serif;font-size:26px;margin:0;color:var(--gold);letter-spacing:.5px}
+.chip{font-size:12px;font-weight:800;padding:4px 12px;border-radius:999px}
+.chip.today{background:var(--gold);color:#3a2a00}
+.chip.air{background:#e8143f;color:#fff}
+.dcount{color:var(--mut);font-size:13px;margin-left:auto}
+.post{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--pink);
+border-radius:16px;margin:14px 0;overflow:hidden}
+.post.k-fbpage{border-left-color:#4d8ef7}.post.k-group{border-left-color:var(--gold)}
+.post.k-insta{border-left-color:var(--pink)}.post.k-story{border-left-color:#b06df5}
+.phead{display:flex;align-items:center;gap:10px;padding:12px 14px 0;flex-wrap:wrap}
+.num{font-family:Bangers,"Arial Black",Impact,sans-serif;font-size:22px;background:var(--pink);color:#fff;border-radius:10px;
+min-width:40px;text-align:center;padding:2px 8px}
+.pill{font-size:12px;font-weight:800;padding:5px 12px;border-radius:999px;background:#00000045;
+border:1px solid var(--line)}
+.k-fbpage .pill.surf{color:#9cc2ff}.k-group .pill.surf{color:var(--gold)}
+.k-insta .pill.surf{color:#ff9ccb}.k-story .pill.surf{color:#d2aaff}
+.ptime{color:var(--mut);font-size:14px;font-weight:700;margin-left:auto}
+.opt{color:var(--mut);font-size:12px;font-style:italic}
+.pbody{padding:10px 14px 14px}
+.media{margin:10px 0}
+.media img{width:100%;border-radius:12px;display:block;border:1px solid var(--line)}
+.media video{width:100%;max-height:520px;border-radius:12px;background:#000;border:1px solid var(--line)}
+.strip{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px}
+.strip a{flex:0 0 31%}
+.strip img{width:100%;border-radius:10px;border:1px solid var(--line)}
+.hint{color:var(--gold);font-size:13.5px;font-weight:700;margin:6px 0 0}
+.cap{background:#150a1e;border:1px solid var(--line);border-radius:12px;padding:12px;margin:10px 0 8px;
+white-space:pre-wrap;font-size:15.5px}
+.cap.cmt{border-style:dashed}
+.btnrow{display:flex;gap:10px;flex-wrap:wrap;margin:4px 0 2px}
+button.act{font-size:16px;font-weight:800;padding:12px 18px;border-radius:12px;border:0;cursor:pointer;
+background:var(--pink);color:#fff;box-shadow:0 2px 0 #a71f66}
+button.act.alt{background:#3b1c4d;color:var(--text);border:1px solid var(--line);box-shadow:none}
+button.act:active{transform:translateY(1px)}
+a.go{display:inline-block;font-size:15px;font-weight:800;color:#fff;background:#3b1c4d;
+border:1px solid var(--line);padding:11px 16px;border-radius:12px;text-decoration:none;margin:8px 0 0}
+a.go::after{content:" ↗"}
+.note{margin:12px 0 0;padding:10px 12px;background:#00000038;border-left:3px solid var(--gold);
+border-radius:8px;font-size:14.5px}
+.why{color:var(--mut);font-size:13px;margin:8px 0 0}
+.doneline{display:flex;align-items:center;gap:12px;padding:12px 14px;background:#00000030;
+border-top:1px solid var(--line);cursor:pointer;user-select:none}
+.doneline input{width:26px;height:26px;accent-color:var(--green)}
+.doneline span{font-weight:800;font-size:16px}
+.post.isdone{opacity:.45}
+.post.isdone .pbody,.post.isdone .phead{display:none}
+.post.isdone .doneline{border-top:0}
+.stories{background:#1c0e28;border:1px dashed var(--line);border-radius:14px;padding:14px;margin:22px 0;
+color:var(--mut);font-size:14.5px}
+.stories b{color:var(--text)}
+details{background:var(--card);border:1px solid var(--line);border-radius:14px;margin:12px 0;padding:0 16px}
+summary{font-family:Bangers,"Arial Black",Impact,sans-serif;font-size:21px;letter-spacing:.5px;color:var(--gold);
+padding:14px 0;cursor:pointer;list-style:none}
+summary::before{content:"▸ ";color:var(--pink)}
+details[open] summary::before{content:"▾ "}
+details ol{margin:0 0 16px;padding-left:22px}
+details li{margin:9px 0}
+details p{color:var(--mut);font-size:14.5px}
+kbd{background:#000;border:1px solid var(--line);border-radius:6px;padding:1px 7px;font-size:13px}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin:14px 0}
+.fitem{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:8px;text-align:center}
+.fitem img{width:100%;border-radius:8px}
+.fitem a{color:var(--pink);font-weight:800;font-size:13px;text-decoration:none;display:block;padding:6px 0 2px}
+.fname{color:var(--mut);font-size:11.5px;word-break:break-all}
+.toast{position:fixed;left:50%;bottom:26px;opacity:0;pointer-events:none;transform:translateX(-50%) translateY(16px);
+background:var(--green);color:#06220f;font-weight:900;padding:12px 26px;border-radius:999px;
+transition:transform .25s;z-index:99;box-shadow:0 6px 18px #0008}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.foot{color:var(--mut);font-size:12.5px;text-align:center;margin-top:34px}
+.revlink{display:block;text-align:center;margin:10px 0 0;padding:11px 14px;border-radius:12px;
+background:#2b1439;border:1px solid var(--line);color:var(--gold);text-decoration:none;
+font-weight:700;font-size:14.5px}
+.revlink:active{background:#3b1c4d}
+.revlink{font-size:16px;border-color:var(--gold)}
+.stamp{text-align:center;color:var(--mut);font-size:12px;margin:6px 0 0}
+@media(min-width:640px){.strip a{flex-basis:23%}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <img src="logo.png" alt="">
+    <div>
+      <h1>RUBY'S POSTING DESK</h1>
+      <p class="week">Week of August 14, 2026 — Episode 04: Let Down Your Last Armor</p>
+    </div>
+  </header>
+  <div class="progress"><div class="bar" id="bar"></div><div class="txt" id="ptxt"></div></div>
+  <a class="revlink" href="review/">&#9998;&nbsp; Something look wrong? Open the REVIEW DESK &rarr;</a>
+  <p class="stamp">Updated Fri 7 Aug, 10:24 PM</p>
+  <nav class="tabs">
+    <button id="t0" class="on" onclick="tab(0)">This Week</button>
+    <button id="t1" onclick="tab(1)">How To</button>
+    <button id="t2" onclick="tab(2)">All Files</button>
+  </nav>
+  <main id="v0"></main>
+  <main id="v1" style="display:none">
+    <details open><summary>Start here (read once)</summary>
+      <p>This page is your whole week. Each card below is one post: the picture, the words,
+      where it goes, and the day and time. Work top to bottom. When one is done, tap
+      <b>Done</b> — it folds away and the pink bar at the top fills up.</p>
+      <p><b>Most of the week is the four groups.</b> Those matter most, so they come first
+      on every day. Instagram is only three posts a week now.</p>
+      <ol>
+        <li>Bookmark this page.</li>
+        <li>Be logged into Facebook as yourself — the account that runs the Page and the groups.</li>
+        <li>That is the whole setup.</li>
+      </ol>
+    </details>
+    <details><summary>Post in one of the groups (most of your week)</summary>
+      <ol>
+        <li>Tap <b>Copy caption</b> on the card, then <b>Open the group</b>.</li>
+        <li>Tap <b>Write something…</b> at the top of the group.</li>
+        <li>Paste the words, then add the picture (<b>Photo/Video</b>, pick the one you saved
+            from this page — tap the picture here, then save it).</li>
+        <li><b>To schedule instead of posting now:</b> look for the small <b>calendar icon</b>
+            at the bottom of the box you are typing in. Tap it, set the day and time from the
+            card, then <b>Schedule</b>. You can only do this in groups where you are an admin —
+            which is all four of yours.</li>
+      </ol>
+      <p>Every group gets slightly different words on purpose. Please use the caption on the
+      matching card — four identical posts at once is what Facebook treats as spam.</p>
+    </details>
+    <details><summary>Post on the Page (your creator dashboard)</summary>
+      <ol>
+        <li>Tap <b>Copy caption</b>, then <b>Open your Page dashboard</b>.</li>
+        <li>That is your <b>Professional dashboard</b> — the creator tools for the Page. If the
+            button does not land you there, go to your Page and look for
+            <b>Professional dashboard</b> in the menu.</li>
+        <li>Find <b>Create post</b> (sometimes under <b>Planner</b> or <b>Posts</b>).</li>
+        <li>Paste the words, add the picture.</li>
+        <li>Instead of Publish, open the little arrow beside it and choose <b>Schedule</b>.
+            Set the day and time from the card.</li>
+      </ol>
+      <p>You do not need Meta Business Suite for any of this. The Page's own dashboard does it.</p>
+    </details>
+    <details><summary>The first-comment trick (the Friday drop posts)</summary>
+      <p>Some cards have a second, dashed box — the link to the episode. A link put
+      <i>inside</i> a Facebook post gets shown to far fewer people, so it goes in the
+      <b>first comment</b> instead.</p>
+      <ol>
+        <li>A comment cannot be scheduled, so this is a one-minute job on Friday morning.</li>
+        <li>Just after the post goes live, open it.</li>
+        <li>Tap <b>Copy comment</b> here, paste it as the first comment, post it.</li>
+      </ol>
+    </details>
+    <details><summary>Instagram — only three posts a week</summary>
+      <ol>
+        <li><b>The carousel (Wednesday)</b> — the big one. Post all six pictures in the order
+            they appear on the card. In the Instagram app: <b>+</b> → select all six in order →
+            share.</li>
+        <li><b>The Friday feed post</b> — one picture, paste the caption.</li>
+        <li><b>The Story (air night)</b> — save the tall picture, add it as a Story, then tap
+            the sticker icon (the smiley), choose <b>Poll</b>, and type the same two answers
+            that are on the picture.</li>
+      </ol>
+      <p>Instagram cannot schedule from a computer browser, so these are done in the app on
+      your phone, on the day.</p>
+    </details>
+    <details><summary>Saving a picture to post it</summary>
+      <ol>
+        <li><b>On a phone:</b> press and hold the picture here, then <b>Save</b> — it goes to
+            your camera roll.</li>
+        <li><b>On a laptop:</b> click the picture so it opens big, then right-click →
+            <b>Save Image As…</b></li>
+      </ol>
+    </details>
+    <details><summary>If something does not work</summary>
+      <ol>
+        <li>Copy button does nothing? Select the words with your finger or mouse and copy them
+            the normal way.</li>
+        <li>A picture will not load? Pull down to refresh the page once.</li>
+        <li>No calendar icon in a group? You are probably not signed in as an admin of that group.</li>
+        <li>Anything else — message Eddie. Nothing here can break by tapping around.</li>
+      </ol>
+    </details>
+  </main>
+  <main id="v2" style="display:none"></main>
+  <p class="foot">Reality Recaps Unfiltered · this page updates every week when the new episode is built</p>
+</div>
+<div class="toast" id="toast">Copied ✓</div>
+<script>
+const DATA = {"week": "2026-08-14", "weekLabel": "Week of August 14, 2026 — Episode 04: Let Down Your Last Armor", "show": "90 Day: The Last Resort", "days": [{"date": "2026-08-10", "label": "Monday, August 10", "air": true, "posts": [{"id": "2026-08-10_1a", "n": "1a", "date": "2026-08-10", "time": "18:30", "time12": "6:30 PM PT · 9:30 PM ET", "surface": "Facebook Groups — Group 1", "kind": "group", "pillar": "Live reaction", "media": {"type": "image", "files": ["cards/poll_sq.jpg"]}, "body": "Watching live and I already have opinions.\n\nThe castle is on tonight. Who falls apart first?\n\nDrop it below — I'm reading all of these before I write Friday's recap.", "comment": "", "note": "Post while the episode is actually airing. Reply to every comment in the first hour.", "why": "Air night. The audience is on the couch with a second screen already open.", "optional": false, "where": {"label": "Open the group", "url": "https://www.facebook.com/groups/1424265178479154/"}}, {"id": "2026-08-10_1b", "n": "1b", "date": "2026-08-10", "time": "18:50", "time12": "6:50 PM PT · 9:50 PM ET", "surface": "Facebook Groups — Group 2", "kind": "group", "pillar": "Live reaction", "media": {"type": "image", "files": ["cards/poll_sq.jpg"]}, "body": "Right, I'm in. Who else is watching?\n\nThe castle is on tonight. Who falls apart first?\n\nDrop it below — I'm reading all of these before I write Friday's recap.", "comment": "", "note": "Post while the episode is actually airing. Reply to every comment in the first hour.", "why": "Air night. The audience is on the couch with a second screen already open.", "optional": false, "where": {"label": "Open the group", "url": "https://www.facebook.com/groups/923388525929070"}}, {"id": "2026-08-10_2", "n": "2", "date": "2026-08-10", "time": "19:00", "time12": "7:00 PM PT · 10:00 PM ET", "surface": "Instagram Story", "kind": "story", "pillar": "Live reaction", "media": {"type": "image", "files": ["cards/poll_st.jpg"]}, "body": "Can a castle fix a marriage?", "comment": "", "note": "Add the native POLL sticker over the card with the same two options. Poll stickers are the cheapest engagement signal on the platform.", "why": "The one cheap Instagram touch of the night — a poll sticker over the same card.", "optional": false, "where": {"label": "Open Instagram", "url": "https://www.instagram.com/"}}]}, {"date": "2026-08-11", "label": "Tuesday, August 11", "air": false, "posts": [{"id": "2026-08-11_3a", "n": "3a", "date": "2026-08-11", "time": "09:00", "time12": "9:00 AM PT · 12:00 PM ET", "surface": "Facebook Groups — Group 3", "kind": "group", "pillar": "Engagement", "media": {"type": "image", "files": ["cards/grid_sq.jpg"]}, "body": "Genuine question, no wrong answers.\n\nSix couples went in. Which one actually makes it out?\n\nI'll tally these and read the results on Friday's episode.", "comment": "", "note": "Promising to read results on air is what converts a group poll into a listen.", "why": "The other two groups get the cast grid while the episode is still being argued about.", "optional": false, "where": {"label": "Open the group", "url": "https://www.facebook.com/groups/245467712260075"}}, {"id": "2026-08-11_3b", "n": "3b", "date": "2026-08-11", "time": "09:20", "time12": "9:20 AM PT · 12:20 PM ET", "surface": "Facebook Groups — Group 4", "kind": "group", "pillar": "Engagement", "media": {"type": "image", "files": ["cards/grid_sq.jpg"]}, "body": "Putting this to the group because I can't decide.\n\nSix couples went in. Which one actually makes it out?\n\nI'll tally these and read the results on Friday's episode.", "comment": "", "note": "Promising to read results on air is what converts a group poll into a listen.", "why": "The other two groups get the cast grid while the episode is still being argued about.", "optional": false, "where": {"label": "Open the group", "url": "https://www.facebook.com/groups/330047340094993"}}, {"id": "2026-08-11_4", "n": "4", "date": "2026-08-11", "time": "12:00", "time12": "12:00 PM PT · 3:00 PM ET", "surface": "Facebook Page", "kind": "fbpage", "pillar": "Hot take", "media": {"type": "image", "files": ["cards/poll_pt.jpg"]}, "body": "Can a castle actually fix a marriage?\n\nI have a take. You go first.", "comment": "", "note": "Ask, then shut up. Do not explain your own answer in the post — save it for the comments.", "why": "Facebook's Tuesday midday window. A question lifts comments ~37%.", "optional": false, "where": {"label": "Open your Page dashboard", "url": "https://www.facebook.com/professional_dashboard"}}]}, {"date": "2026-08-12", "label": "Wednesday, August 12", "air": false, "posts": [{"id": "2026-08-12_5", "n": "5", "date": "2026-08-12", "time": "12:00", "time12": "12:00 PM PT · 3:00 PM ET", "surface": "Instagram carousel", "kind": "insta", "pillar": "Deep dive", "media": {"type": "carousel", "files": ["cards/carousel_cover_pt.jpg", "cards/carousel_1_pt.jpg", "cards/carousel_2_pt.jpg", "cards/carousel_3_pt.jpg", "cards/carousel_4_pt.jpg", "cards/carousel_5_pt.jpg"]}, "body": "Five signs a couple is done, long before they say it out loud.\n\nBe honest — how many of these have you called correctly?\n\nSwipe through, then tell me which one you missed.\n\n#90DayFiance #90DayTheLastResort #TheLastResort #RealityTVRecap", "comment": "", "note": "Carousels get a second shot at distribution when people don't swipe to the end. Put the weakest slide second-to-last, never last.", "why": "Instagram's strongest slot and its strongest format — carousels pull 9x the saves of a single image. This is the main Instagram investment of the week.", "optional": false, "where": {"label": "Open Instagram", "url": "https://www.instagram.com/"}}, {"id": "2026-08-12_6", "n": "6", "date": "2026-08-12", "time": "18:00", "time12": "6:00 PM PT · 9:00 PM ET", "surface": "Facebook Page", "kind": "fbpage", "pillar": "Pull quote", "media": {"type": "image", "files": ["cards/quote_pt.jpg"]}, "body": "\"Six couples. One castle. Zero chill.\"\n\nThat is the whole season in seven words. New recaps every Friday.", "comment": "", "note": "Let the quote carry it. If the line is about a real person's conduct, no jokey framing — quote it straight.", "why": "Wednesday evening on the Page. Quote cards carry Ruby's voice better than anything else.", "optional": false, "where": {"label": "Open your Page dashboard", "url": "https://www.facebook.com/professional_dashboard"}}]}, {"date": "2026-08-13", "label": "Thursday, August 13", "air": false, "posts": [{"id": "2026-08-13_7a", "n": "7a", "date": "2026-08-13", "time": "09:00", "time12": "9:00 AM PT · 12:00 PM ET", "surface": "Facebook Groups — Group 1", "kind": "group", "pillar": "Pull quote", "media": {"type": "image", "files": ["cards/quote_sq.jpg"]}, "body": "Still thinking about this one.\n\n\"Six couples. One castle. Zero chill.\"\n\nThat is the whole season in seven words.", "comment": "", "note": "Let the line sit on its own. No setup, no explaining the joke.", "why": "A different pair of groups, a different card — the rotation never repeats a group's last post.", "optional": false, "where": {"label": "Open the group", "url": "https://www.facebook.com/groups/1424265178479154/"}}, {"id": "2026-08-13_7b", "n": "7b", "date": "2026-08-13", "time": "09:20", "time12": "9:20 AM PT · 12:20 PM ET", "surface": "Facebook Groups — Group 3", "kind": "group", "pillar": "Pull quote", "media": {"type": "image", "files": ["cards/quote_sq.jpg"]}, "body": "I wrote this down so I could stare at it later.\n\n\"Six couples. One castle. Zero chill.\"\n\nThat is the whole season in seven words.", "comment": "", "note": "Let the line sit on its own. No setup, no explaining the joke.", "why": "A different pair of groups, a different card — the rotation never repeats a group's last post.", "optional": false, "where": {"label": "Open the group", "url": "https://www.facebook.com/groups/245467712260075"}}, {"id": "2026-08-13_8", "n": "8", "date": "2026-08-13", "time": "18:00", "time12": "6:00 PM PT · 9:00 PM ET", "surface": "Facebook Page", "kind": "fbpage", "pillar": "Engagement", "media": {"type": "image", "files": ["cards/grid_pt.jpg"]}, "body": "Six couples went into that castle. Which one are you rooting for?\n\nName them. I will read the results out on the show.", "comment": "", "note": "Ask them to name the couple. A name typed in a comment is the strongest signal Facebook reads.", "why": "Thursday evening spike on Facebook. Naming a couple in a comment is the strongest signal the feed reads.", "optional": false, "where": {"label": "Open your Page dashboard", "url": "https://www.facebook.com/professional_dashboard"}}]}, {"date": "2026-08-14", "label": "Friday, August 14", "air": false, "posts": [{"id": "2026-08-14_9", "n": "9", "date": "2026-08-14", "time": "09:00", "time12": "9:00 AM PT · 12:00 PM ET", "surface": "Facebook Page", "kind": "fbpage", "pillar": "Episode drop", "media": {"type": "image", "files": ["cards/announce_pt.jpg"]}, "body": "New recap is live.\n\nEpisode 04 — Let Down Your Last Armor.\n\nFifteen minutes, every couple, no sugarcoating.", "comment": "Listen here: https://open.spotify.com/show/033ytv1rfdA0Y0XVaJzgHY", "note": "LINK IN THE FIRST COMMENT, posted by the Page, within a minute of publishing. A link in the body costs roughly half the reach.", "why": "Publish day. Link goes in the FIRST COMMENT — link posts earn half the reach.", "optional": false, "where": {"label": "Open your Page dashboard", "url": "https://www.facebook.com/professional_dashboard"}}, {"id": "2026-08-14_10", "n": "10", "date": "2026-08-14", "time": "09:15", "time12": "9:15 AM PT · 12:15 PM ET", "surface": "Instagram feed", "kind": "insta", "pillar": "Episode drop", "media": {"type": "image", "files": ["cards/announce_pt.jpg"]}, "body": "Six couples went into that castle. Not all of them are coming out.\n\nNew episode tomorrow.\n\n#90DayFiance #90DayTheLastResort #TheLastResort #RealityTVRecap", "comment": "", "note": "Thursday 9am. Short. This one exists to prime tomorrow, not to be read.", "why": "The one Instagram feed post of the week, on the day it matters most.", "optional": false, "where": {"label": "Open Instagram", "url": "https://www.instagram.com/"}}, {"id": "2026-08-14_11a", "n": "11a", "date": "2026-08-14", "time": "10:00", "time12": "10:00 AM PT · 1:00 PM ET", "surface": "Facebook Groups — Group 1", "kind": "group", "pillar": "Episode drop", "media": {"type": "image", "files": ["cards/announce_sq.jpg"]}, "body": "Okay, we need to talk about this one.\n\nEpisode 04 — Let Down Your Last Armor is up.\n\nEvery couple covered, and I do not go easy on anybody.", "comment": "Link's here if you want it: https://open.spotify.com/show/033ytv1rfdA0Y0XVaJzgHY", "note": "Each group gets a DIFFERENT opening line. Same asset is fine; identical text is not.", "why": "All four groups, staggered 20 minutes apart, each with its own opening line.", "optional": false, "where": {"label": "Open the group", "url": "https://www.facebook.com/groups/1424265178479154/"}}, {"id": "2026-08-14_11b", "n": "11b", "date": "2026-08-14", "time": "10:20", "time12": "10:20 AM PT · 1:20 PM ET", "surface": "Facebook Groups — Group 2", "kind": "group", "pillar": "Episode drop", "media": {"type": "image", "files": ["cards/announce_sq.jpg"]}, "body": "New recap is up and I did not hold back.\n\nEpisode 04 — Let Down Your Last Armor is up.\n\nEvery couple covered, and I do not go easy on anybody.", "comment": "Link's here if you want it: https://open.spotify.com/show/033ytv1rfdA0Y0XVaJzgHY", "note": "Each group gets a DIFFERENT opening line. Same asset is fine; identical text is not.", "why": "All four groups, staggered 20 minutes apart, each with its own opening line.", "optional": false, "where": {"label": "Open the group", "url": "https://www.facebook.com/groups/923388525929070"}}, {"id": "2026-08-14_11c", "n": "11c", "date": "2026-08-14", "time": "10:40", "time12": "10:40 AM PT · 1:40 PM ET", "surface": "Facebook Groups — Group 3", "kind": "group", "pillar": "Episode drop", "media": {"type": "image", "files": ["cards/announce_sq.jpg"]}, "body": "If you've been waiting for me to say it — I said it.\n\nEpisode 04 — Let Down Your Last Armor is up.\n\nEvery couple covered, and I do not go easy on anybody.", "comment": "Link's here if you want it: https://open.spotify.com/show/033ytv1rfdA0Y0XVaJzgHY", "note": "Each group gets a DIFFERENT opening line. Same asset is fine; identical text is not.", "why": "All four groups, staggered 20 minutes apart, each with its own opening line.", "optional": false, "where": {"label": "Open the group", "url": "https://www.facebook.com/groups/245467712260075"}}, {"id": "2026-08-14_11d", "n": "11d", "date": "2026-08-14", "time": "11:00", "time12": "11:00 AM PT · 2:00 PM ET", "surface": "Facebook Groups — Group 4", "kind": "group", "pillar": "Episode drop", "media": {"type": "image", "files": ["cards/announce_sq.jpg"]}, "body": "This week's recap is live and the group chat is going to hate me.\n\nEpisode 04 — Let Down Your Last Armor is up.\n\nEvery couple covered, and I do not go easy on anybody.", "comment": "Link's here if you want it: https://open.spotify.com/show/033ytv1rfdA0Y0XVaJzgHY", "note": "Each group gets a DIFFERENT opening line. Same asset is fine; identical text is not.", "why": "All four groups, staggered 20 minutes apart, each with its own opening line.", "optional": false, "where": {"label": "Open the group", "url": "https://www.facebook.com/groups/330047340094993"}}, {"id": "2026-08-14_12", "n": "12", "date": "2026-08-14", "time": "18:00", "time12": "6:00 PM PT · 9:00 PM ET", "surface": "Facebook Page", "kind": "fbpage", "pillar": "Verdict", "media": {"type": "image", "files": ["cards/verdict_pt.jpg"]}, "body": "Six couples. One castle.\n\nNobody is leaving quietly. Who do you have making it out?", "comment": "", "note": "A number is an argument. Post it and let them fight about it.", "why": "Friday evening close-out on the Page. A number is an argument.", "optional": false, "where": {"label": "Open your Page dashboard", "url": "https://www.facebook.com/professional_dashboard"}}]}, {"date": "2026-08-16", "label": "Sunday, August 16", "air": false, "posts": [{"id": "2026-08-16_13", "n": "13", "date": "2026-08-16", "time": "17:00", "time12": "5:00 PM PT · 8:00 PM ET", "surface": "Facebook Page", "kind": "fbpage", "pillar": "Evergreen", "media": {"type": "image", "files": ["cards/evergreen_pt.jpg"]}, "body": "Reality TV doesn't need a filter. Neither do we. New episodes every Friday.", "comment": "", "note": "Bank content. Never write anything new for this slot.", "why": "Optional. Weekends are weak, so this is bank content, never anything new.", "optional": true, "where": {"label": "Open your Page dashboard", "url": "https://www.facebook.com/professional_dashboard"}}]}], "files": ["cards/announce_pt.jpg", "cards/announce_sq.jpg", "cards/announce_st.jpg", "cards/carousel_1_pt.jpg", "cards/carousel_2_pt.jpg", "cards/carousel_3_pt.jpg", "cards/carousel_4_pt.jpg", "cards/carousel_5_pt.jpg", "cards/carousel_cover_pt.jpg", "cards/carousel_cover_st.jpg", "cards/evergreen_pt.jpg", "cards/evergreen_st.jpg", "cards/grid_pt.jpg", "cards/grid_sq.jpg", "cards/grid_st.jpg", "cards/poll_pt.jpg", "cards/poll_sq.jpg", "cards/poll_st.jpg", "cards/quote_pt.jpg", "cards/quote_sq.jpg", "cards/quote_st.jpg", "cards/verdict_pt.jpg", "cards/verdict_st.jpg"]};
+const KEY = "rru_done_v1_" + DATA.week;
+let done = {};
+try { done = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch(e) {}
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(done)); }catch(e){} }
+
+function toast(msg){ const t=document.getElementById("toast"); t.textContent=msg;
+  t.classList.add("show"); setTimeout(()=>t.classList.remove("show"), 1400); }
+
+function copyText(txt){
+  if(navigator.clipboard && window.isSecureContext){
+    navigator.clipboard.writeText(txt).then(()=>toast("Copied ✓"),()=>fallback(txt));
+  } else fallback(txt);
+}
+function fallback(txt){
+  const ta=document.createElement("textarea"); ta.value=txt; document.body.appendChild(ta);
+  ta.select(); try{ document.execCommand("copy"); toast("Copied ✓"); }
+  catch(e){ toast("Select the text and press ⌘C"); } ta.remove();
+}
+
+function todayISO(){
+  return new Intl.DateTimeFormat("en-CA",{timeZone:"America/Los_Angeles"}).format(new Date());
+}
+
+function esc(s){ return (s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+
+function mediaHTML(p){
+  const m=p.media;
+  if(m.type==="video"){
+    const f=m.files[0];
+    return `<div class="media"><video controls preload="metadata" src="${f}"></video></div>
+      <div class="btnrow"><a class="go" href="${f}" download>Download video</a></div>`;
+  }
+  if(m.type==="carousel"){
+    const th=m.files.map((f,i)=>`<a href="${f}" target="_blank"><img src="${f}" alt="slide ${i+1}"></a>`).join("");
+    return `<div class="media"><div class="strip">${th}</div>
+      <p class="hint">This is a carousel — post ALL ${m.files.length} pictures, left to right in this order.</p></div>`;
+  }
+  return `<div class="media"><a href="${m.files[0]}" target="_blank"><img src="${m.files[0]}" alt=""></a></div>`;
+}
+
+function postHTML(p){
+  const isDone = !!done[p.id];
+  const cmt = p.comment ? `
+    <div class="cap cmt" id="c_${p.id}">${esc(p.comment)}</div>
+    <div class="btnrow"><button class="act alt" onclick="copyText(DATA._c['${p.id}'])">Copy comment</button></div>
+    <p class="why">Paste this as the FIRST comment right after the post goes live.</p>` : "";
+  return `<article class="post k-${p.kind} ${isDone?"isdone":""}" id="p_${p.id}">
+    <div class="phead">
+      <span class="num">${p.n}</span>
+      <span class="pill surf">${esc(p.surface)}</span>
+      ${p.optional?'<span class="opt">optional</span>':""}
+      <span class="ptime">${esc(p.time12)}</span>
+    </div>
+    <div class="pbody">
+      ${mediaHTML(p)}
+      <div class="cap">${esc(p.body)}</div>
+      <div class="btnrow">
+        <button class="act" onclick="copyText(DATA._b['${p.id}'])">Copy caption</button>
+        <a class="go" href="${p.where.url}" target="_blank" rel="noopener">${esc(p.where.label)}</a>
+      </div>
+      ${cmt}
+      <p class="note">${esc(p.note)}</p>
+      <p class="why">Why this slot: ${esc(p.why)}</p>
+    </div>
+    <label class="doneline"><input type="checkbox" ${isDone?"checked":""}
+      onchange="mark('${p.id}', this.checked)"><span>Done — scheduled it</span></label>
+  </article>`;
+}
+
+function render(){
+  const tod = todayISO();
+  DATA._b = {}; DATA._c = {};
+  let html = "";
+  for(const d of DATA.days){
+    const doneCount = d.posts.filter(p=>done[p.id]).length;
+    html += `<div class="day"><h2>${esc(d.label)}</h2>
+      ${d.date===tod?'<span class="chip today">TODAY</span>':""}
+      ${d.air?'<span class="chip air">AIR NIGHT</span>':""}
+      <span class="dcount">${doneCount}/${d.posts.length} done</span></div>`;
+    for(const p of d.posts){ DATA._b[p.id]=p.body; DATA._c[p.id]=p.comment; html += postHTML(p); }
+  }
+  html += `<div class="stories"><b>Also this week: Stories.</b> Two a day keeps the show on
+    people's screens between episodes. Grab any tall (9:16) picture from <b>All Files</b>,
+    post it as an Instagram Story, and on poll days add the poll sticker. Five minutes total.</div>`;
+  document.getElementById("v0").innerHTML = html;
+
+  const all = DATA.days.flatMap(d=>d.posts);
+  const nd = all.filter(p=>done[p.id]).length;
+  const pct = all.length ? Math.round(nd*100/all.length) : 0;
+  document.getElementById("bar").style.width = pct+"%";
+  document.getElementById("ptxt").textContent =
+    nd===all.length ? "All " + all.length + " posts scheduled — done for the week! 🎉"
+                    : nd + " of " + all.length + " scheduled";
+}
+
+function filesHTML(){
+  const items = DATA.files.map(f=>{
+    const isV = f.endsWith(".mp4");
+    const th = isV ? `<div style="font-size:44px;padding:26px 0">🎬</div>` : `<img src="${f}" loading="lazy">`;
+    return `<div class="fitem">${th}<a href="${f}" ${isV?"download":'target="_blank"'}>${isV?"Download":"Open full size"}</a>
+      <div class="fname">${esc(f.split("/").pop())}</div></div>`;
+  }).join("");
+  return `<p class="why" style="margin-top:14px">Every picture in every shape (square, tall
+    4:5, and 9:16 for Stories) plus the week's videos. Click to open, right-click to save.</p>
+    <div class="fgrid">${items}</div>`;
+}
+
+function mark(id, v){ if(v) done[id]=true; else delete done[id]; save(); render(); }
+function tab(i){ for(let k=0;k<3;k++){ document.getElementById("v"+k).style.display = k===i?"":"none";
+  document.getElementById("t"+k).classList.toggle("on", k===i); } window.scrollTo(0,0); }
+
+document.getElementById("v2").innerHTML = filesHTML();
+render();
+</script>
+</body>
+</html>
