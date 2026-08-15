@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow"><meta name="theme-color" content="#1E0E2E">
+<title>Review Desk — Reality Recaps Unfiltered</title>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+<style>
+:root{--pink:#FF3D9A;--gold:#F5C542;--card:#241031;--line:#4a2a5a;--text:#F4EDF8;
+--mut:#BFA8CC;--green:#2ecc71;--amber:#e8a13f;}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+background:linear-gradient(180deg,#1E0E2E,#341242 45%,#0F0818) fixed;color:var(--text);font-size:17px;line-height:1.45}
+.wrap{max-width:1200px;margin:0 auto;padding:16px 14px 120px}
+.explain{max-width:860px}
+h1{font-family:Bangers,"Arial Black",sans-serif;font-size:36px;letter-spacing:1px;margin:6px 0 2px;
+text-shadow:0 0 18px rgba(255,61,154,.5)}
+.sub{color:var(--mut);font-size:14px;margin:0 0 14px}
+.explain{background:#1c0e28;border:1px solid var(--line);border-left:5px solid var(--gold);
+border-radius:14px;padding:14px 16px;margin:14px 0 22px;font-size:15px}
+.explain b{color:var(--gold)}
+.explain ol{margin:8px 0 0;padding-left:20px}
+.howto{background:#00000038;border-radius:10px;padding:11px 12px;margin:12px 0 0;font-size:14.5px}.explain li{margin:6px 0}
+.bar{background:#00000055;border:1px solid var(--line);border-radius:999px;height:32px;position:relative;
+overflow:hidden;margin:10px 0 6px}
+.bar i{position:absolute;inset:0;width:0;background:linear-gradient(90deg,var(--pink),#ff7ec0);transition:width .3s}
+.bar span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-weight:800;
+font-size:14px;text-shadow:0 1px 2px #0008}
+h2{font-family:Bangers,"Arial Black",sans-serif;font-size:27px;color:var(--gold);margin:30px 0 4px;letter-spacing:.5px;grid-column:1/-1}
+.it{background:var(--card);border:1px solid var(--line);border-radius:16px;margin:0;overflow:hidden}
+.it.ok{border-left:6px solid var(--green)}.it.chg{border-left:6px solid var(--amber)}
+.it .in{padding:14px}
+.it img{width:100%;max-width:340px;border-radius:12px;border:1px solid var(--line);display:block;margin-bottom:10px}
+.nm{font-family:Bangers,"Arial Black",sans-serif;font-size:21px;letter-spacing:.5px}
+.tag{display:inline-block;font-size:11.5px;font-weight:800;padding:4px 10px;border-radius:999px;
+background:#00000045;border:1px solid var(--line);color:var(--mut);margin:0 6px 6px 0}
+.how{color:var(--mut);font-size:14px;margin:8px 0}
+.made{background:#150a1e;border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin:10px 0;font-size:14px}
+.made b{color:var(--pink)}
+.made table{width:100%;border-collapse:collapse}
+.made td{padding:3px 0;vertical-align:top}
+.made td:first-child{color:var(--mut);width:34%;padding-right:10px}
+.cap{background:#150a1e;border:1px solid var(--line);border-radius:12px;padding:12px;white-space:pre-wrap;
+font-size:15.5px;margin:8px 0}
+.btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+.btns button{font-size:15px;font-weight:800;padding:11px 18px;border-radius:12px;border:2px solid var(--line);
+background:#2b1439;color:var(--text);cursor:pointer}
+.btns button.on-ok{background:var(--green);border-color:var(--green);color:#06220f}
+.btns button.on-chg{background:var(--amber);border-color:var(--amber);color:#2a1700}
+textarea{width:100%;margin-top:10px;background:#150a1e;color:var(--text);border:1px solid var(--line);
+border-radius:10px;padding:11px;font:inherit;font-size:15px;min-height:74px;display:none}
+textarea.show{display:block}
+.foot{position:fixed;left:0;right:0;bottom:0;background:#160a20ee;border-top:2px solid var(--pink);
+padding:12px 14px;display:flex;gap:10px;justify-content:center;backdrop-filter:blur(6px)}
+.foot button{font-size:16px;font-weight:900;padding:13px 22px;border-radius:12px;border:0;cursor:pointer;
+background:var(--pink);color:#fff;box-shadow:0 2px 0 #a71f66}
+.foot button.alt{background:#3b1c4d;color:var(--text);border:1px solid var(--line);box-shadow:none}
+.stamp{color:var(--mut);font-size:12px;margin:2px 0 10px}
+.backlink{display:inline-block;margin:2px 0 8px;padding:9px 14px;border-radius:11px;
+background:#2b1439;border:1px solid var(--line);color:var(--gold);text-decoration:none;
+font-weight:700;font-size:14px}
+.toast{position:fixed;left:50%;bottom:104px;transform:translateX(-50%) translateY(16px);background:var(--green);
+color:#06220f;font-weight:900;padding:12px 24px;border-radius:999px;z-index:120;box-shadow:0 6px 20px #0009;
+opacity:0;pointer-events:none;transition:transform .25s,opacity .25s}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+/* Review items flow into columns; the section headers span the row.
+   One column on a phone, three on a computer. Images are already capped small. */
+#body{display:grid;grid-template-columns:1fr;gap:16px;align-items:start}
+.it img{max-width:100%}
+@media(min-width:760px){#body{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1040px){#body{grid-template-columns:repeat(3,1fr)}}
+</style></head><body>
+<div class="wrap">
+  <h1>REVIEW DESK</h1>
+  <p class="sub" id="sub"></p>
+  <a class="backlink" href="../">&larr; Back to the Posting Desk</a>
+  <p class="stamp">Updated Sat 15 Aug, 1:28 PM</p>
+  <div class="explain">
+    <b>How any of this got made — the short version.</b>
+    <ol>
+      <li>Every picture is a <b>frame taken out of an episode we animated ourselves</b>, or one of Ruby's studio pictures. Nothing is bought, generated fresh, or taken from the TV network.</li>
+      <li>A script lays our own graphics on top of that frame — background, logo, the pink lines, the lettering. Same eight layouts every week.</li>
+      <li>The words come from a plain text file. <b>Changing the words does not need new artwork</b> — it re-draws in about fifteen seconds.</li>
+      <li>You mark each one below. Nothing gets posted until you say so.</li>
+    </ol>
+    <p class="howto"><b>How to do it:</b> go all the way down the page first &mdash; tap
+    <b>Looks good</b> or <b>Change this</b> on every item, and type your note wherever you
+    want something different. <b>Then, once at the very end</b>, tap the button at the bottom.
+    You do <u>not</u> send after each change &mdash; one send covers the whole week. Your marks
+    save on this device, so you can stop halfway and come back.</p>
+  </div>
+  <div class="bar"><i id="bi"></i><span id="bt"></span></div>
+  <div id="body"></div>
+</div>
+<div class="foot">
+  <button onclick="sendFeedback()" id="sendbtn">Send my feedback</button>
+  <button class="alt" onclick="copyFeedback()">Copy instead</button>
+  <button class="alt" onclick="approveAll()">Approve all</button>
+  <button class="alt" onclick="resetAll()">Start over</button>
+</div>
+<div class="toast" id="toast">Copied ✓</div>
+<script>
+const D = {"week": "2026-08-14", "title": "Episode 05: Last Chance for Honor", "show": "90 Day: The Last Resort", "items": [{"kind": "art", "id": "art_announce_pt.jpg", "file": "cards/announce_pt.jpg", "label": "announce_pt.jpg", "tpl": "Episode-drop card", "how": "Purple gradient background, the logo at the top, one picture in a band across the middle with pink lines above and below, then the show name and a pink button shape at the bottom.", "size": "tall 4:5 — the main feed size", "origin": "episode config", "words": {"eyebrow": "New episodes every Friday", "show": "90 Day: The Last Resort", "cta": "Listen now", "strap": "The recap you actually wanted"}, "pics": ["couple_COLLAGE.png"]}, {"kind": "art", "id": "art_announce_s11g0_sq.jpg", "file": "cards/announce_s11g0_sq.jpg", "label": "announce_s11g0_sq.jpg", "tpl": "announce_s11g0", "how": "", "size": "square — Facebook", "origin": "episode config", "words": {}, "pics": []}, {"kind": "art", "id": "art_announce_s11g0_st.jpg", "file": "cards/announce_s11g0_st.jpg", "label": "announce_s11g0_st.jpg", "tpl": "announce_s11g0", "how": "", "size": "very tall 9:16 — Stories", "origin": "episode config", "words": {}, "pics": []}, {"kind": "art", "id": "art_announce_s11g1_sq.jpg", "file": "cards/announce_s11g1_sq.jpg", "label": "announce_s11g1_sq.jpg", "tpl": "announce_s11g1", "how": "", "size": "square — Facebook", "origin": "episode config", "words": {}, "pics": []}, {"kind": "art", "id": "art_announce_s11g1_st.jpg", "file": "cards/announce_s11g1_st.jpg", "label": "announce_s11g1_st.jpg", "tpl": "announce_s11g1", "how": "", "size": "very tall 9:16 — Stories", "origin": "episode config", "words": {}, "pics": []}, {"kind": "art", "id": "art_announce_s11g2_sq.jpg", "file": "cards/announce_s11g2_sq.jpg", "label": "announce_s11g2_sq.jpg", "tpl": "announce_s11g2", "how": "", "size": "square — Facebook", "origin": "episode config", "words": {}, "pics": []}, {"kind": "art", "id": "art_announce_s11g2_st.jpg", "file": "cards/announce_s11g2_st.jpg", "label": "announce_s11g2_st.jpg", "tpl": "announce_s11g2", "how": "", "size": "very tall 9:16 — Stories", "origin": "episode config", "words": {}, "pics": []}, {"kind": "art", "id": "art_announce_s11g3_sq.jpg", "file": "cards/announce_s11g3_sq.jpg", "label": "announce_s11g3_sq.jpg", "tpl": "announce_s11g3", "how": "", "size": "square — Facebook", "origin": "episode config", "words": {}, "pics": []}, {"kind": "art", "id": "art_announce_s11g3_st.jpg", "file": "cards/announce_s11g3_st.jpg", "label": "announce_s11g3_st.jpg", "tpl": "announce_s11g3", "how": "", "size": "very tall 9:16 — Stories", "origin": "episode config", "words": {}, "pics": []}, {"kind": "art", "id": "art_announce_sq.jpg", "file": "cards/announce_sq.jpg", "label": "announce_sq.jpg", "tpl": "Episode-drop card", "how": "Purple gradient background, the logo at the top, one picture in a band across the middle with pink lines above and below, then the show name and a pink button shape at the bottom.", "size": "square — Facebook", "origin": "episode config", "words": {"eyebrow": "New episodes every Friday", "show": "90 Day: The Last Resort", "cta": "Listen now", "strap": "The recap you actually wanted"}, "pics": ["couple_COLLAGE.png"]}, {"kind": "art", "id": "art_announce_st.jpg", "file": "cards/announce_st.jpg", "label": "announce_st.jpg", "tpl": "Episode-drop card", "how": "Purple gradient background, the logo at the top, one picture in a band across the middle with pink lines above and below, then the show name and a pink button shape at the bottom.", "size": "very tall 9:16 — Stories", "origin": "episode config", "words": {"eyebrow": "New episodes every Friday", "show": "90 Day: The Last Resort", "cta": "Listen now", "strap": "The recap you actually wanted"}, "pics": ["couple_COLLAGE.png"]}, {"kind": "art", "id": "art_carousel_1_pt.jpg", "file": "cards/carousel_1_pt.jpg", "label": "carousel_1_pt.jpg", "tpl": "Carousel slide 2-6", "how": "Numbered chip top-left, a picture band, the point in big letters and the detail in gold underneath.", "size": "tall 4:5 — the main feed size", "origin": "evergreen bank, concept \"done_signs\" (auto-picked for this week)", "words": {"title": "They stop saying we", "body": "Listen for the switch to I. It always comes first."}, "pics": ["Ruby_neon_angle_closeup_LOGO.png"]}, {"kind": "art", "id": "art_carousel_2_pt.jpg", "file": "cards/carousel_2_pt.jpg", "label": "carousel_2_pt.jpg", "tpl": "Carousel slide 2-6", "how": "Numbered chip top-left, a picture band, the point in big letters and the detail in gold underneath.", "size": "tall 4:5 — the main feed size", "origin": "evergreen bank, concept \"done_signs\" (auto-picked for this week)", "words": {"title": "One of them starts performing", "body": "When someone plays to the camera instead of the person, they have checked out"}, "pics": ["Ruby_glam_set_COMIC.png"]}, {"kind": "art", "id": "art_carousel_3_pt.jpg", "file": "cards/carousel_3_pt.jpg", "label": "carousel_3_pt.jpg", "tpl": "Carousel slide 2-6", "how": "Numbered chip top-left, a picture band, the point in big letters and the detail in gold underneath.", "size": "tall 4:5 — the main feed size", "origin": "evergreen bank, concept \"done_signs\" (auto-picked for this week)", "words": {"title": "The apology has conditions", "body": "I am sorry you feel that way is not an apology, it is a verdict"}, "pics": ["Ruby_neon_angle_reaction_LOGO.png"]}, {"kind": "art", "id": "art_carousel_4_pt.jpg", "file": "cards/carousel_4_pt.jpg", "label": "carousel_4_pt.jpg", "tpl": "Carousel slide 2-6", "how": "Numbered chip top-left, a picture band, the point in big letters and the detail in gold underneath.", "size": "tall 4:5 — the main feed size", "origin": "evergreen bank, concept \"done_signs\" (auto-picked for this week)", "words": {"title": "They agree too fast", "body": "People who are still fighting for it argue. Agreement can be surrender."}, "pics": ["Ruby_neon_angle_wide_LOGO.png"]}, {"kind": "art", "id": "art_carousel_5_pt.jpg", "file": "cards/carousel_5_pt.jpg", "label": "carousel_5_pt.jpg", "tpl": "Carousel slide 2-6", "how": "Numbered chip top-left, a picture band, the point in big letters and the detail in gold underneath.", "size": "tall 4:5 — the main feed size", "origin": "evergreen bank, concept \"done_signs\" (auto-picked for this week)", "words": {"title": "Somebody gets very calm", "body": "The loudest one is not the one leaving"}, "pics": ["Ruby_neon_set_COMIC.png"]}, {"kind": "art", "id": "art_carousel_cover_pt.jpg", "file": "cards/carousel_cover_pt.jpg", "label": "carousel_cover_pt.jpg", "tpl": "Carousel slide 1", "how": "One picture blown up to fill the whole card, blurred and darkened so it reads as texture, with the headline glowing on top and a SWIPE button at the bottom.", "size": "tall 4:5 — the main feed size", "origin": "evergreen bank, concept \"done_signs\" (auto-picked for this week)", "words": {"kicker": "Reality TV rules", "headline": "5 signs a couple is done before anyone says it"}, "pics": ["Ruby_cozy_set_COMIC.png"]}, {"kind": "art", "id": "art_carousel_cover_st.jpg", "file": "cards/carousel_cover_st.jpg", "label": "carousel_cover_st.jpg", "tpl": "Carousel slide 1", "how": "One picture blown up to fill the whole card, blurred and darkened so it reads as texture, with the headline glowing on top and a SWIPE button at the bottom.", "size": "very tall 9:16 — Stories", "origin": "evergreen bank, concept \"done_signs\" (auto-picked for this week)", "words": {"kicker": "Reality TV rules", "headline": "5 signs a couple is done before anyone says it"}, "pics": ["Ruby_cozy_set_COMIC.png"]}, {"kind": "art", "id": "art_evergreen_pt.jpg", "file": "cards/evergreen_pt.jpg", "label": "evergreen_pt.jpg", "tpl": "Tagline card", "how": "No photograph at all — just the background, the logo, and three lines of text with the last one in gold.", "size": "tall 4:5 — the main feed size", "origin": "episode config", "words": {"punch": "Pull up.", "lines": "Reality TV doesn't / need a filter. / Neither do we."}, "pics": []}, {"kind": "art", "id": "art_evergreen_st.jpg", "file": "cards/evergreen_st.jpg", "label": "evergreen_st.jpg", "tpl": "Tagline card", "how": "No photograph at all — just the background, the logo, and three lines of text with the last one in gold.", "size": "very tall 9:16 — Stories", "origin": "episode config", "words": {"punch": "Pull up.", "lines": "Reality TV doesn't / need a filter. / Neither do we."}, "pics": []}, {"kind": "art", "id": "art_grid_pt.jpg", "file": "cards/grid_pt.jpg", "label": "grid_pt.jpg", "tpl": "Cast grid", "how": "Six pictures tiled two-across with no background at all, and a dark band through the middle carrying the question in red.", "size": "tall 4:5 — the main feed size", "origin": "episode config", "words": {"line1": "Which couple", "line2": "are you rooting for?"}, "pics": ["couple_Kara_Guillermo.png", "couple_Rebecca_Zied.png", "couple_Shekinah_Sarper.png", "couple_Jenny_Sumit.png", "couple_Paola_Russ.png", "couple_Thais_Patrick.png"]}, {"kind": "art", "id": "art_grid_s3g2_sq.jpg", "file": "cards/grid_s3g2_sq.jpg", "label": "grid_s3g2_sq.jpg", "tpl": "grid_s3g2", "how": "", "size": "square — Facebook", "origin": "episode config", "words": {}, "pics": []}, {"kind": "art", "id": "art_grid_s3g2_st.jpg", "file": "cards/grid_s3g2_st.jpg", "label": "grid_s3g2_st.jpg", "tpl": "grid_s3g2", "how": "", "size": "very tall 9:16 — Stories", "origin": "episode config", "words": {}, "pics": []}, {"kind": "art", "id": "art_grid_s3g3_sq.jpg", "file": "cards/grid_s3g3_sq.jpg", "label": "grid_s3g3_sq.jpg", "tpl": "grid_s3g3", "how": "", "size": "square — Facebook", "origin": "episode config", "words": {}, "pics": []}, {"kind": "art", "id": "art_grid_s3g3_st.jpg", "file": "cards/grid_s3g3_st.jpg", "label": "grid_s3g3_st.jpg", "tpl": "grid_s3g3", "how": "", "size": "very tall 9:16 — Stories", "origin": "episode config", "words": {}, "pics": []}, {"kind": "art", "id": "art_grid_sq.jpg", "file": "cards/grid_sq.jpg", "label": "grid_sq.jpg", "tpl": "Cast grid", "how": "Six pictures tiled two-across with no background at all, and a dark band through the middle carrying the question in red.", "size": "square — Facebook", "origin": "episode config", "words": {"line1": "Which couple", "line2": "are you rooting for?"}, "pics": ["couple_Kara_Guillermo.png", "couple_Rebecca_Zied.png", "couple_Shekinah_Sarper.png", "couple_Jenny_Sumit.png", "couple_Paola_Russ.png", "couple_Thais_Patrick.png"]}, {"kind": "art", "id": "art_grid_st.jpg", "file": "cards/grid_st.jpg", "label": "grid_st.jpg", "tpl": "Cast grid", "how": "Six pictures tiled two-across with no background at all, and a dark band through the middle carrying the question in red.", "size": "very tall 9:16 — Stories", "origin": "episode config", "words": {"line1": "Which couple", "line2": "are you rooting for?"}, "pics": ["couple_Kara_Guillermo.png", "couple_Rebecca_Zied.png", "couple_Shekinah_Sarper.png", "couple_Jenny_Sumit.png", "couple_Paola_Russ.png", "couple_Thais_Patrick.png"]}, {"kind": "art", "id": "art_poll_pt.jpg", "file": "cards/poll_pt.jpg", "label": "poll_pt.jpg", "tpl": "Question card", "how": "Warmer background, a picture band, the question in big letters, then a green and a red pill shape with the two answers.", "size": "tall 4:5 — the main feed size", "origin": "episode config", "words": {"question": "Can a castle actually fix a marriage?", "opt_a": "Yes", "opt_b": "No chance", "footer_line": "Drop it in the comments", "image_st": "../_SHARED/couples/couple_Rebecca_Zied.png"}, "pics": ["couple_Shekinah_Sarper.png"]}, {"kind": "art", "id": "art_poll_s1g0_sq.jpg", "file": "cards/poll_s1g0_sq.jpg", "label": "poll_s1g0_sq.jpg", "tpl": "poll_s1g0", "how": "", "size": "square — Facebook", "origin": "episode config", "words": {}, "pics": []}, {"kind": "art", "id": "art_poll_s1g0_st.jpg", "file": "cards/poll_s1g0_st.jpg", "label": "poll_s1g0_st.jpg", "tpl": "poll_s1g0", "how": "", "size": "very tall 9:16 — Stories", "origin": "episode config", "words": {}, "pics": []}, {"kind": "art", "id": "art_poll_s1g1_sq.jpg", "file": "cards/poll_s1g1_sq.jpg", "label": "poll_s1g1_sq.jpg", "tpl": "poll_s1g1", "how": "", "size": "square — Facebook", "origin": "episode config", "words": {}, "pics": []}, {"kind": "art", "id": "art_poll_s1g1_st.jpg", "file": "cards/poll_s1g1_st.jpg", "label": "poll_s1g1_st.jpg", "tpl": "poll_s1g1", "how": "", "size": "very tall 9:16 — Stories", "origin": "episode config", "words": {}, "pics": []}, {"kind": "art", "id": "art_poll_sq.jpg", "file": "cards/poll_sq.jpg", "label": "poll_sq.jpg", "tpl": "Question card", "how": "Warmer background, a picture band, the question in big letters, then a green and a red pill shape with the two answers.", "size": "square — Facebook", "origin": "episode config", "words": {"question": "Can a castle actually fix a marriage?", "opt_a": "Yes", "opt_b": "No chance", "footer_line": "Drop it in the comments", "image_st": "../_SHARED/couples/couple_Rebecca_Zied.png"}, "pics": ["couple_Shekinah_Sarper.png"]}, {"kind": "art", "id": "art_poll_st.jpg", "file": "cards/poll_st.jpg", "label": "poll_st.jpg", "tpl": "Question card", "how": "Warmer background, a picture band, the question in big letters, then a green and a red pill shape with the two answers.", "size": "very tall 9:16 — Stories", "origin": "episode config", "words": {"question": "Can a castle actually fix a marriage?", "opt_a": "Yes", "opt_b": "No chance", "footer_line": "Drop it in the comments", "image_st": "../_SHARED/couples/couple_Rebecca_Zied.png"}, "pics": ["couple_Shekinah_Sarper.png"]}, {"kind": "art", "id": "art_quote_pt.jpg", "file": "cards/quote_pt.jpg", "label": "quote_pt.jpg", "tpl": "Pull-quote card", "how": "Same background with comic dots over it, a picture band, then Ruby's line in big letters underneath with a smaller gold line below it.", "size": "tall 4:5 — the main feed size", "origin": "episode config", "words": {"quote": "Six couples. One castle. Zero chill.", "attrib": "Ruby, every single week"}, "pics": ["couple_Jenny_Sumit.png"]}, {"kind": "art", "id": "art_quote_s7g0_sq.jpg", "file": "cards/quote_s7g0_sq.jpg", "label": "quote_s7g0_sq.jpg", "tpl": "quote_s7g0", "how": "", "size": "square — Facebook", "origin": "episode config", "words": {}, "pics": []}, {"kind": "art", "id": "art_quote_s7g0_st.jpg", "file": "cards/quote_s7g0_st.jpg", "label": "quote_s7g0_st.jpg", "tpl": "quote_s7g0", "how": "", "size": "very tall 9:16 — Stories", "origin": "episode config", "words": {}, "pics": []}, {"kind": "art", "id": "art_quote_s7g2_sq.jpg", "file": "cards/quote_s7g2_sq.jpg", "label": "quote_s7g2_sq.jpg", "tpl": "quote_s7g2", "how": "", "size": "square — Facebook", "origin": "episode config", "words": {}, "pics": []}, {"kind": "art", "id": "art_quote_s7g2_st.jpg", "file": "cards/quote_s7g2_st.jpg", "label": "quote_s7g2_st.jpg", "tpl": "quote_s7g2", "how": "", "size": "very tall 9:16 — Stories", "origin": "episode config", "words": {}, "pics": []}, {"kind": "art", "id": "art_quote_sq.jpg", "file": "cards/quote_sq.jpg", "label": "quote_sq.jpg", "tpl": "Pull-quote card", "how": "Same background with comic dots over it, a picture band, then Ruby's line in big letters underneath with a smaller gold line below it.", "size": "square — Facebook", "origin": "episode config", "words": {"quote": "Six couples. One castle. Zero chill.", "attrib": "Ruby, every single week"}, "pics": ["couple_Jenny_Sumit.png"]}, {"kind": "art", "id": "art_quote_st.jpg", "file": "cards/quote_st.jpg", "label": "quote_st.jpg", "tpl": "Pull-quote card", "how": "Same background with comic dots over it, a picture band, then Ruby's line in big letters underneath with a smaller gold line below it.", "size": "very tall 9:16 — Stories", "origin": "episode config", "words": {"quote": "Six couples. One castle. Zero chill.", "attrib": "Ruby, every single week"}, "pics": ["couple_Jenny_Sumit.png"]}, {"kind": "art", "id": "art_verdict_pt.jpg", "file": "cards/verdict_pt.jpg", "label": "verdict_pt.jpg", "tpl": "Number card", "how": "A blurred picture behind, a big pink circle with a number in it, and a line of text underneath.", "size": "tall 4:5 — the main feed size", "origin": "episode config", "words": {"label": "This season", "score": "6", "sub": "One castle. Nobody is leaving quietly.", "under": "couples"}, "pics": ["couple_Paola_Russ.png"]}, {"kind": "art", "id": "art_verdict_st.jpg", "file": "cards/verdict_st.jpg", "label": "verdict_st.jpg", "tpl": "Number card", "how": "A blurred picture behind, a big pink circle with a number in it, and a line of text underneath.", "size": "very tall 9:16 — Stories", "origin": "episode config", "words": {"label": "This season", "score": "6", "sub": "One castle. Nobody is leaving quietly.", "under": "couples"}, "pics": ["couple_Paola_Russ.png"]}], "posts": [{"kind": "copy", "id": "copy_2026-08-10_1a", "n": "1a", "when": "2026-08-10 · 18:30", "surface": "Facebook Groups — Group 1", "body": "Watching live and I already have opinions.\n\nThe castle is on tonight. Who falls apart first?\n\nDrop it below — I'm reading all of these before I write Friday's recap.", "comment": "▶ Full episodes & clips on YouTube — subscribe: https://www.youtube.com/@RealityRecapsUnfiltered", "asset": "poll_s1g0_sq.jpg"}, {"kind": "copy", "id": "copy_2026-08-10_1b", "n": "1b", "when": "2026-08-10 · 18:50", "surface": "Facebook Groups — Group 2", "body": "Right, I'm in. Who else is watching?\n\nThe castle is on tonight. Who falls apart first?\n\nDrop it below — I'm reading all of these before I write Friday's recap.", "comment": "▶ Full episodes & clips on YouTube — subscribe: https://www.youtube.com/@RealityRecapsUnfiltered", "asset": "poll_s1g1_sq.jpg"}, {"kind": "copy", "id": "copy_2026-08-10_2", "n": "2", "when": "2026-08-10 · 19:00", "surface": "Instagram Story", "body": "Can a castle fix a marriage?", "comment": "", "asset": "poll_st.jpg"}, {"kind": "copy", "id": "copy_2026-08-11_3a", "n": "3a", "when": "2026-08-11 · 09:00", "surface": "Facebook Groups — Group 3", "body": "Genuine question, no wrong answers.\n\nSix couples went in. Which one actually makes it out?\n\nI'll tally these and read the results on Friday's episode.", "comment": "▶ Full episodes & clips on YouTube — subscribe: https://www.youtube.com/@RealityRecapsUnfiltered", "asset": "grid_sq.jpg"}, {"kind": "copy", "id": "copy_2026-08-11_3b", "n": "3b", "when": "2026-08-11 · 09:20", "surface": "Facebook Groups — Group 4", "body": "Putting this to the group because I can't decide.\n\nSix couples went in. Which one actually makes it out?\n\nI'll tally these and read the results on Friday's episode.", "comment": "▶ Full episodes & clips on YouTube — subscribe: https://www.youtube.com/@RealityRecapsUnfiltered", "asset": "grid_sq.jpg"}, {"kind": "copy", "id": "copy_2026-08-11_4", "n": "4", "when": "2026-08-11 · 12:00", "surface": "Facebook Page", "body": "Can a castle actually fix a marriage?\n\nI have a take. You go first.", "comment": "▶ Full episodes & clips on YouTube — subscribe: https://www.youtube.com/@RealityRecapsUnfiltered", "asset": "poll_pt.jpg"}, {"kind": "copy", "id": "copy_2026-08-12_5", "n": "5", "when": "2026-08-12 · 12:00", "surface": "Instagram carousel", "body": "Five signs a couple is done, long before they say it out loud.\n\nBe honest — how many of these have you called correctly?\n\nSwipe through, then tell me which one you missed.\n\n#90DayFiance #90DayTheLastResort #TheLastResort #RealityTVRecap", "comment": "", "asset": "carousel_cover_pt.jpg + carousel_1_pt.jpg + carousel_2_pt.jpg + carousel_3_pt.jpg + carousel_4_pt.jpg + carousel_5_pt.jpg"}, {"kind": "copy", "id": "copy_2026-08-12_6", "n": "6", "when": "2026-08-12 · 18:00", "surface": "Facebook Page", "body": "\"Six couples. One castle. Zero chill.\"\n\nThat is the whole season in seven words. New recaps every Friday.", "comment": "▶ Full episodes & clips on YouTube — subscribe: https://www.youtube.com/@RealityRecapsUnfiltered", "asset": "quote_pt.jpg"}, {"kind": "copy", "id": "copy_2026-08-13_7a", "n": "7a", "when": "2026-08-13 · 09:00", "surface": "Facebook Groups — Group 1", "body": "Still thinking about this one.\n\n\"Six couples. One castle. Zero chill.\"\n\nThat is the whole season in seven words.", "comment": "▶ Full episodes & clips on YouTube — subscribe: https://www.youtube.com/@RealityRecapsUnfiltered", "asset": "quote_s7g0_sq.jpg"}, {"kind": "copy", "id": "copy_2026-08-13_7b", "n": "7b", "when": "2026-08-13 · 09:20", "surface": "Facebook Groups — Group 3", "body": "I wrote this down so I could stare at it later.\n\n\"Six couples. One castle. Zero chill.\"\n\nThat is the whole season in seven words.", "comment": "▶ Full episodes & clips on YouTube — subscribe: https://www.youtube.com/@RealityRecapsUnfiltered", "asset": "quote_s7g2_sq.jpg"}, {"kind": "copy", "id": "copy_2026-08-13_8", "n": "8", "when": "2026-08-13 · 18:00", "surface": "Facebook Page", "body": "Six couples went into that castle. Which one are you rooting for?\n\nName them. I will read the results out on the show.", "comment": "▶ Full episodes & clips on YouTube — subscribe: https://www.youtube.com/@RealityRecapsUnfiltered", "asset": "grid_pt.jpg"}, {"kind": "copy", "id": "copy_2026-08-14_9", "n": "9", "when": "2026-08-14 · 09:00", "surface": "Facebook Page", "body": "New recap is live.\n\nEpisode 05 — Last Chance for Honor.\n\nFifteen minutes, every couple, no sugarcoating.", "comment": "Listen here: https://open.spotify.com/show/033ytv1rfdA0Y0XVaJzgHY\n\n▶ Full episodes & clips on YouTube — subscribe: https://www.youtube.com/@RealityRecapsUnfiltered", "asset": "announce_pt.jpg"}, {"kind": "copy", "id": "copy_2026-08-14_10", "n": "10", "when": "2026-08-14 · 09:15", "surface": "Instagram feed", "body": "Six couples went into that castle. Not all of them are coming out.\n\nNew episode tomorrow.\n\n#90DayFiance #90DayTheLastResort #TheLastResort #RealityTVRecap", "comment": "", "asset": "announce_pt.jpg"}, {"kind": "copy", "id": "copy_2026-08-14_11a", "n": "11a", "when": "2026-08-14 · 10:00", "surface": "Facebook Groups — Group 1", "body": "Okay, we need to talk about this one.\n\nEpisode 05 — Last Chance for Honor is up.\n\nEvery couple covered, and I do not go easy on anybody.", "comment": "Link's here if you want it: https://open.spotify.com/show/033ytv1rfdA0Y0XVaJzgHY\n\n▶ Full episodes & clips on YouTube — subscribe: https://www.youtube.com/@RealityRecapsUnfiltered", "asset": "announce_s11g0_sq.jpg"}, {"kind": "copy", "id": "copy_2026-08-14_11b", "n": "11b", "when": "2026-08-14 · 10:20", "surface": "Facebook Groups — Group 2", "body": "New recap is up and I did not hold back.\n\nEpisode 05 — Last Chance for Honor is up.\n\nEvery couple covered, and I do not go easy on anybody.", "comment": "Link's here if you want it: https://open.spotify.com/show/033ytv1rfdA0Y0XVaJzgHY\n\n▶ Full episodes & clips on YouTube — subscribe: https://www.youtube.com/@RealityRecapsUnfiltered", "asset": "announce_s11g1_sq.jpg"}, {"kind": "copy", "id": "copy_2026-08-14_11c", "n": "11c", "when": "2026-08-14 · 10:40", "surface": "Facebook Groups — Group 3", "body": "If you've been waiting for me to say it — I said it.\n\nEpisode 05 — Last Chance for Honor is up.\n\nEvery couple covered, and I do not go easy on anybody.", "comment": "Link's here if you want it: https://open.spotify.com/show/033ytv1rfdA0Y0XVaJzgHY\n\n▶ Full episodes & clips on YouTube — subscribe: https://www.youtube.com/@RealityRecapsUnfiltered", "asset": "announce_s11g2_sq.jpg"}, {"kind": "copy", "id": "copy_2026-08-14_11d", "n": "11d", "when": "2026-08-14 · 11:00", "surface": "Facebook Groups — Group 4", "body": "This week's recap is live and the group chat is going to hate me.\n\nEpisode 05 — Last Chance for Honor is up.\n\nEvery couple covered, and I do not go easy on anybody.", "comment": "Link's here if you want it: https://open.spotify.com/show/033ytv1rfdA0Y0XVaJzgHY\n\n▶ Full episodes & clips on YouTube — subscribe: https://www.youtube.com/@RealityRecapsUnfiltered", "asset": "announce_s11g3_sq.jpg"}, {"kind": "copy", "id": "copy_2026-08-14_12", "n": "12", "when": "2026-08-14 · 18:00", "surface": "Facebook Page", "body": "Six couples. One castle.\n\nNobody is leaving quietly. Who do you have making it out?", "comment": "▶ Full episodes & clips on YouTube — subscribe: https://www.youtube.com/@RealityRecapsUnfiltered", "asset": "verdict_pt.jpg"}, {"kind": "copy", "id": "copy_2026-08-16_13", "n": "13", "when": "2026-08-16 · 17:00", "surface": "Facebook Page", "body": "Reality TV doesn't need a filter. Neither do we. New episodes every Friday.", "comment": "▶ Full episodes & clips on YouTube — subscribe: https://www.youtube.com/@RealityRecapsUnfiltered", "asset": "evergreen_pt.jpg"}]};
+const FEEDBACK_EMAIL = "realityrecapsunfiltered@gmail.com";
+const KEY = "rru_review_" + D.week;
+let S = {}; try { S = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch(e) {}
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e){} };
+const esc = s => (s==null?"":String(s)).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+function toast(m){const t=document.getElementById("toast");t.textContent=m;t.classList.add("show");
+  setTimeout(()=>t.classList.remove("show"),1500);}
+
+function mark(id, v){ S[id] = S[id] || {}; S[id].v = v; save(); render(); }
+function note(id, txt){ S[id] = S[id] || {}; S[id].n = txt; save(); }
+
+function itemHTML(o){
+  const st = (S[o.id]||{}).v || "", nt = (S[o.id]||{}).n || "";
+  const cls = st==="ok" ? "ok" : st==="chg" ? "chg" : "";
+  let made = "";
+  if (o.kind === "art") {
+    const rows = Object.entries(o.words||{}).map(([k,v])=>
+      `<tr><td>${esc(k)}</td><td>“${esc(v)}”</td></tr>`).join("");
+    made = `<div class="made"><b>How this one was made</b>
+      <table>
+        <tr><td>layout</td><td>${esc(o.tpl)}</td></tr>
+        <tr><td>size</td><td>${esc(o.size)}</td></tr>
+        <tr><td>picture used</td><td>${o.pics.length? o.pics.map(esc).join("<br>") : "none — text only"}</td></tr>
+        <tr><td>words come from</td><td>${esc(o.origin)}</td></tr>
+        ${rows}
+      </table></div>
+      <p class="how">${esc(o.how)}</p>`;
+  }
+  const head = o.kind==="art"
+    ? `<img src="${o.file}" loading="lazy"><div class="nm">${esc(o.label)}</div>`
+    : `<div class="nm">#${esc(o.n)} — ${esc(o.surface)}</div>
+       <span class="tag">${esc(o.when)}</span><span class="tag">picture: ${esc(o.asset)}</span>
+       <div class="cap">${esc(o.body)}</div>
+       ${o.comment?`<div class="cap">First comment: ${esc(o.comment)}</div>`:""}`;
+  return `<div class="it ${cls}" id="${o.id}"><div class="in">
+    ${head}${made}
+    <div class="btns">
+      <button class="${st==='ok'?'on-ok':''}" onclick="mark('${o.id}','ok')">Looks good</button>
+      <button class="${st==='chg'?'on-chg':''}" onclick="mark('${o.id}','chg')">Change this</button>
+    </div>
+    <textarea class="${st==='chg'?'show':''}" placeholder="What should change? Plain English is fine."
+      oninput="note('${o.id}', this.value)">${esc(nt)}</textarea>
+  </div></div>`;
+}
+
+function render(){
+  document.getElementById("sub").textContent = D.title + " · " + D.show;
+  let h = `<h2>The pictures (${D.items.length})</h2>` + D.items.map(itemHTML).join("");
+  h += `<h2>The words (${D.posts.length} posts)</h2>` + D.posts.map(itemHTML).join("");
+  document.getElementById("body").innerHTML = h;
+  const all = D.items.length + D.posts.length;
+  const done = Object.values(S).filter(x=>x.v).length;
+  document.getElementById("bi").style.width = (all? done*100/all : 0) + "%";
+  document.getElementById("bt").textContent = done===all
+    ? `All ${all} reviewed — hit Copy my feedback` : `${done} of ${all} reviewed`;
+}
+
+function collect(){
+  const L = [], byId = {};
+  [...D.items, ...D.posts].forEach(o => byId[o.id] = o);
+  let ok=0, chg=[];
+  Object.entries(S).forEach(([id,v])=>{
+    const o = byId[id]; if(!o) return;
+    if(v.v==="ok") ok++;
+    if(v.v==="chg") chg.push({o, n:(v.n||"").trim()});
+  });
+  L.push(`REVIEW — ${D.title}`);
+  L.push(`${ok} approved, ${chg.length} need changes.`);
+  if(chg.length){
+    L.push(""); L.push("CHANGES REQUESTED:");
+    chg.forEach(({o,n})=>{
+      const what = o.kind==="art" ? `IMAGE ${o.label}` : `CAPTION #${o.n} (${o.surface})`;
+      L.push(`- ${what}: ${n || "(no note — please ask me)"}`);
+    });
+  }
+  const untouched = [...D.items,...D.posts].filter(o=>!(S[o.id]||{}).v);
+  if(untouched.length){ L.push(""); L.push(`Not reviewed yet: ${untouched.length}`); }
+  return L.join("\n");
+}
+
+function copyFeedback(){
+  const t = collect();
+  const done = () => toast("Copied — paste it to Claude ✓");
+  if(navigator.clipboard && window.isSecureContext){ navigator.clipboard.writeText(t).then(done, fb); }
+  else fb();
+  function fb(){ const a=document.createElement("textarea"); a.value=t; document.body.appendChild(a);
+    a.select(); try{ document.execCommand("copy"); done(); }catch(e){ toast("Select and press ⌘C"); } a.remove(); }
+}
+function sendFeedback(){
+  const t = collect();
+  const subject = "Posting Desk review \u2014 " + D.title;
+  // Phone: the native share sheet. Ruby picks Messages / WhatsApp / Mail, and it queues
+  // until she has signal — she never needs Claude or any cloud tool herself.
+  if (navigator.share) {
+    navigator.share({ title: subject, text: t })
+      .then(()=>toast("Sent \u2713")).catch(()=>{});
+    return;
+  }
+  // Laptop: open her mail app with the whole thing already filled in.
+  const url = "mailto:" + FEEDBACK_EMAIL + "?subject=" + encodeURIComponent(subject)
+            + "&body=" + encodeURIComponent(t);
+  if (url.length > 1900) { copyFeedback(); toast("Long list \u2014 copied instead, paste it in"); return; }
+  window.location.href = url;
+  setTimeout(()=>toast("Opening your email\u2026"), 250);
+}
+function approveAll(){ [...D.items,...D.posts].forEach(o=>{S[o.id]={v:"ok"}}); save(); render(); toast("All approved ✓"); }
+function resetAll(){ S={}; save(); render(); }
+document.getElementById("sendbtn").textContent =
+  navigator.share ? "Send my feedback" : "Email my feedback";
+render();
+</script></body></html>
